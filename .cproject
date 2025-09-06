@@ -41,17 +41,17 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.1314719572" name="Specify VCU support (--vcu_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.vcu2" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.1060239507" name="Specify TMU support (--tmu_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.tmu0" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.1895356942" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" valueType="includePath">
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier_SpeedV3\BSP"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier_SpeedV3\BSP\GPIO"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier_SpeedV3\BSP\I2C"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier_SpeedV3\BSP\eQEP"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier_SpeedV3\BSP\485_ModobusRTU"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier_SpeedV2\BSP\I2C"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier1\BSP\SPLL_FLL"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/GPIO"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/I2C"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/eQEP"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/485_ModobusRTU"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/I2C"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/SPLL_FLL"/>
 									<listOptionValue builtIn="false" value="D:\controlSUITE\libs\app_libs\solar\v1.2\float\include"/>
 									<listOptionValue builtIn="false" value="${workspace_loc:/${ProjName}/BSP/SPLL_SOGI}"/>
 									<listOptionValue builtIn="false" value="${workspace_loc:/${ProjName}/BSP/SPLL}"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier1\BSP\RELAY"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/RELAY"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/PID"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/driverlib"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/driverlib/inc"/>
@@ -61,7 +61,7 @@
 									<listOptionValue builtIn="false" value="${CG_TOOL_ROOT}/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/EMIF"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/LED"/>
-									<listOptionValue builtIn="false" value="D:\CCS_WorkSpace\ThreePhaseRectifier1\BSP\EPWM"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/EPWM"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/INT"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/BSP/ADC"/>
 								</option>
@@ -76,7 +76,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.727905504" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.1445265476" name="Emit diagnostic identifier numbers (--display_error_number, -pden)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1025149777" name="Application binary interface [See 'General' page to edit] (--abi)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.coffabi" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.217197674" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.relaxed" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.217197674" name="Floating Point mode (--fp_mode)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.relaxed" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS.1703254287" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS.479403727" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS.829539212" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS"/>

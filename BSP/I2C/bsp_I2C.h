@@ -36,6 +36,7 @@ void Write_Function(Uint16 reg_address,Uint16 *data,Uint16 data_length);
 int Read_Function(Uint16 reg_address,Uint16 data_length);
 
 void Read_BMS_Information(int flag);//读BMS信息
+void Read_Cap_Current(void);//////快速读取电容电流
 // 函数用于将16位补码转换为原始负数值
 int convertTwosComplementToDecimal(int complement);
 
@@ -93,5 +94,10 @@ extern Uint16 FET_ControlMODE;//FET控制模式
 extern Uint16 FET_Options;//地址 0x9308，默认值 0x0D。。FET控制模式。串并联设置等
 extern Uint16 Protections_A;//启用各种保护
 extern Uint16 Manufacturing_Status_Value;
+
+//电池组
+extern Uint16 Bat_ERR_STATUS;
+//电容组
+extern Uint16 Cap_ERR_STATUS;
 
 #endif

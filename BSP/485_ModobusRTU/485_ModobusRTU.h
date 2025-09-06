@@ -37,16 +37,19 @@ Uint16 Read_InputRegister(Uint16 reg_addr);
 extern int crc_err;
 extern int func_code_err;
 
+extern Uint16 Failure_flag;//故障标志
+
 extern int receive_Rerr;
 extern int slave_addr_Rerr;
 extern Uint16 MODBUS_REG_VALUE[15];  // 寄存器值
-
-extern float speed_ref_ctr;//给定转速
+extern int speed_generation;//初始发电转速
+extern int speed_ref_ctr;//给定转速
 extern int motorspeed_rpm;//转速反馈
 extern int Turn_on_off;//上电，下电标志，直流接入控制
 extern int state_flag;//控制器状态，电机控制器状态
 extern int RELAY2_flag;//继电器使能，状态
 extern int RELAY1_flag;
+extern Uint16 generation_again_en;//允许再次发电使能
 extern Uint16 En_Torque_detec;//输入转矩检测使能位
 extern  float32 Bus_Voltage;
 extern  float32 Bus_Current;
@@ -65,4 +68,6 @@ extern Uint16 Cap_PACK_Voltage;
 extern Uint16 Cap_PACK_Current;
 extern Uint16 Cap_CELL_MaxVoltage;
 extern Uint16 Cap_CELL_MinVoltage;
+extern float32 Te;
+extern float bus_current_avg;
 #endif /* MODOBUSRTU_485_H_ */

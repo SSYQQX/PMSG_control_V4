@@ -15,8 +15,12 @@ extern __interrupt void adcd1_isr(void);
 // float t;/* 时间常数 */
 FILTE Vab_filte;
 FILTE VBus_filte;
+FILTE IBus_filte;
 FILTE temp_filte;
 
+
+//这里的 alpha 越大，响应越慢、滤波越强；
+//alpha 越小，响应越快、保留动态更多。
 //void filte_init(FILTE *filte);
 static void filte_init(FILTE *filte)
 {
@@ -60,6 +64,9 @@ void bsp_adc_init(void)
 
     VBus_filte.f = 150;
     filte_init(&VBus_filte);
+
+    IBus_filte.f=50;
+    filte_init(&IBus_filte);
 
     temp_filte.f = 5;
     filte_init(&temp_filte);

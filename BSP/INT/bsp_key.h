@@ -20,6 +20,9 @@ void key_Init(void);
 interrupt void xint1_isr(void);
 interrupt void xint2_isr(void);
 
-
+extern Uint16 generation_again_en;   //允许再次发电标志
+extern Uint16 generation_again_en;//允许再次发电使能。
+extern Uint16 En_Torque_detec;//允许转矩检测
+extern Uint16 Failure_flag;//故障标志
 
 #endif /* BSP_INT_BSP_KEY_H_ */

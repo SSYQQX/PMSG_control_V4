@@ -256,7 +256,7 @@ void Modobus_485_GpioInit(void)
        GPIO_SetupPinOptions(29, GPIO_OUTPUT, GPIO_ASYNC);  // 配置为输出模式
 }
 
-Uint16 Read_HoldRegister(Uint16 reg_addr)//读
+Uint16 Read_HoldRegister(Uint16 reg_addr)//读保持寄存器
 {
     Uint16 re_value=0;
     switch(reg_addr)
@@ -279,21 +279,34 @@ Uint16 Read_HoldRegister(Uint16 reg_addr)//读
     case 22:
         re_value=CHARGE_FLAG;//电池充电使能
         break;
+    case 23:
+        re_value=Failure_flag;////故障标志
+        break;
+    case 24:
+        re_value=VCC5_EN_FLAG;////VCC5使能标志
+        break;
+    case 28:
+        re_value=generation_again_en;////VCC5使能标志
+        break;
+    case 29:
+        re_value=(Uint16)speed_generation;////初始发电转速
+        break;
+
     default:
-        re_value=0;
+        re_value=0xFF;
 
     }
 
     return re_value;
 
 }
-Uint16 Write_HoldRegister(Uint16 reg_addr,Uint16 Wite_Value)//写
+Uint16 Write_HoldRegister(Uint16 reg_addr,Uint16 Wite_Value)//写 保持寄存器
 {
     Uint16 re_value=0;
     switch(reg_addr)
     {
     case 0://转速给定
-        speed_ref_ctr=(float)Wite_Value;
+        speed_ref_ctr=(int)Wite_Value;
         break;
     case 2:
         Turn_on_off=(int)Wite_Value;//上电，下电标志，直流接入控制
@@ -310,12 +323,25 @@ Uint16 Write_HoldRegister(Uint16 reg_addr,Uint16 Wite_Value)//写
     case 22:
         CHARGE_FLAG=Wite_Value;//电池充电使能
         break;
+    case 23:
+        Failure_flag=Wite_Value;////故障标志
+        break;
+    case 24:
+        VCC5_EN_FLAG=Wite_Value;//VCC5V使能
+        break;
+    case 28:
+        generation_again_en=Wite_Value;//再次发电使能
+        break;
+    case 29:
+        speed_generation=(int)Wite_Value;//初始发电转速
+        break;
+
     default:
-        re_value=0;
+        re_value=0xFF;
     }
     return re_value;
 }
-Uint16 Read_InputRegister(Uint16 reg_addr)
+Uint16 Read_InputRegister(Uint16 reg_addr)//读输入寄存器
 {
     Uint16 re_value=0;
     switch(reg_addr)
@@ -331,7 +357,7 @@ Uint16 Read_InputRegister(Uint16 reg_addr)
         re_value=(Uint16)(Bus_Voltage*100);//母线电压
         break;
     case 7:
-        re_value=(Uint16)(Bus_Current*100);//母线电流
+        re_value=(Uint16)(int)(Bus_Current*1000);//母线电流
         break;
     case 8:
         re_value=(Uint16)(Supercapacitor_Voltage*100);//电容电压
@@ -358,7 +384,7 @@ Uint16 Read_InputRegister(Uint16 reg_addr)
         re_value=Bat_CELL_MinVoltage;//电池最小电压，单位mV
         break;
     case 16:
-        re_value=Cap_ERR_STATUS;//电池组状态
+        re_value=Cap_ERR_STATUS;//电容组状态
         break;
     case 17:
         re_value=Cap_PACK_Voltage;//电池组电压，单位mV
@@ -372,8 +398,17 @@ Uint16 Read_InputRegister(Uint16 reg_addr)
     case 20:
         re_value=Cap_CELL_MinVoltage;//电池最小电压，单位mV
         break;
+    case 25:
+        re_value=(Uint16)(int)(Te*1000);//转矩
+        break;
+    case 26:
+        re_value=(Uint16)(int)(bus_current_avg*1000);//直流电流
+        break;
+    case 27:
+        re_value=(Uint16)(int)((int)(Cap_PACK_Current)*0.001*Supercapacitor_Voltage*100);//直流功率
+        break;
     default:
-        re_value=0;
+        re_value=0xFF;
     }
     return re_value;
 }

@@ -100,6 +100,8 @@ void POSSPEED_Calc()
 //         EQep1Regs.QEPSTS.all = 0x88; // Clear Unit position event flag
 //                                      // Clear overflow error flag
 //     }
+if(motor.Speed_H>5000.0) motor.Speed_H=5000.0;
+if(motor.Speed_H<-5000.0) motor.Speed_H=-5000.0;
 
      motor.Speed_N=motor.Speed_H;
      motorspeed_rpm=motor.Speed_N;
@@ -170,7 +172,7 @@ void Init_EQEP1()
     //QEP捕捉锁存模式设置为单位时间事件发生时将QPOSCNT的值锁存到QPOSLAT中
     EQep1Regs.QEPCTL.bit.QCLM=1;
     //配置UTE单元时间、中断使能、使能
-    EQep1Regs.QUPRD=200000; //分频数。当SYSCLKOUT=200MHz时，2e6设定Unit Timer溢出频率为100Hz,2e5为1000hz；
+    EQep1Regs.QUPRD=200000; //分频数。当SYSCLKOUT=200MHz时，2e6设定Unit Timer溢出频率为100Hz,2e5为1000hz；此时为1000hz
     EQep1Regs.QEINT.bit.UTO=1;//使能UTO中断
     EQep1Regs.QEPCTL.bit.UTE=1;   //使能UTE,使能单位定时器
 //    QFRC

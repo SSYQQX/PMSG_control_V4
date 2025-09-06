@@ -22,9 +22,11 @@ interrupt void xint1_isr(void)///KEY1 关
             while(GpioDataRegs.GPADAT.bit.GPIO26==1);
 
             Turn_on_off=0;//电容断开
+            generation_again_en=0;//允许再次发电使能。
+            En_Torque_detec=0;//允许转矩检测
 
             RELAY_1_OFF();//关继电器1
-            DELAY_US(200*1000);//300ms
+            DELAY_US(100*1000);//100ms
             RELAY_2_OFF();//关继电器2
         }
 
@@ -38,7 +40,7 @@ interrupt void xint1_isr(void)///KEY1 关
 //
 interrupt void xint2_isr(void)///KEY2 开
 {
-
+    static int clear_failure_flag = 0;
     if(GpioDataRegs.GPADAT.bit.GPIO27==1)
     {
         DELAY_US(50);
@@ -46,7 +48,22 @@ interrupt void xint2_isr(void)///KEY2 开
         {
             while(GpioDataRegs.GPADAT.bit.GPIO27==1);
 
+            if(Failure_flag==1)//如果有故障信号，则先清除故障信号。请先确保清除了故障源
+            {
+                clear_failure_flag++;
+                if(clear_failure_flag==2)//按两次才能清除故障
+                {
+                Failure_flag=0;
+                clear_failure_flag=0;
+                }
+            }
+            else    //否则直接开启
+            {
             Turn_on_off=1;//电容接入
+
+            generation_again_en=1;//允许再次发电使能。
+            En_Torque_detec=1;//允许转矩检测
+            }
         }
 
     }

@@ -237,21 +237,21 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-ThreePhaseRectifier_SpeedV3.out \
+ThreePhaseRectifier_SpeedV4_2.out \
 
 EXE_OUTPUTS__QUOTED += \
-"ThreePhaseRectifier_SpeedV3.out" \
+"ThreePhaseRectifier_SpeedV4_2.out" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "ThreePhaseRectifier_SpeedV3.out"
+	@$(MAKE) --no-print-directory -Onone "ThreePhaseRectifier_SpeedV4_2.out"
 
 # Tool invocations
-ThreePhaseRectifier_SpeedV3.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
+ThreePhaseRectifier_SpeedV4_2.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C2000 Linker'
-	"D:/CCS12.3/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 --fp_mode=relaxed --advice:performance=all --define=CPU1 -g --diag_warning=225 --diag_wrap=off --display_error_number --abi=coffabi -z -m"ThreePhaseRectifier_SpeedV3.map" --stack_size=0x200 --warn_sections -i"D:/CCS12.3/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/lib" -i"D:/CCS12.3/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="ThreePhaseRectifier_SpeedV3_linkInfo.xml" --rom_model -o "ThreePhaseRectifier_SpeedV3.out" $(ORDERED_OBJS)
+	"D:/CCS12.3/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 --fp_mode=relaxed --advice:performance=all --define=CPU1 -g --diag_warning=225 --diag_wrap=off --display_error_number --abi=coffabi -z -m"ThreePhaseRectifier_SpeedV4_2.map" --stack_size=0x200 --warn_sections -i"D:/CCS12.3/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/lib" -i"D:/CCS12.3/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="ThreePhaseRectifier_SpeedV4_2_linkInfo.xml" --rom_model -o "ThreePhaseRectifier_SpeedV4_2.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 

@@ -4,7 +4,7 @@ int COM_flag=100;//读写设备号
 int I2C_ERROR_FLAG=0;//I2C故障标志
 int COM_Allow=0;//I2C访问控制位，=2时通信
 ///////////////////////////////BMS变量//////////////////////////////////////////////////
-
+int invalid_interrupt_flag=0;
 //寄存器配置值
 int Ram_SetFlag=0;
 Uint16 Alarm_Set=0;//警报启用
@@ -283,12 +283,12 @@ struct I2CMSG *CurrentMsgPtr;//当前的消息指针。
 
 void I2CB_GpioInit(void)
 {
-GPIO_SetupPinMux(40, GPIO_MUX_CPU1, 6);
-GPIO_SetupPinMux(41, GPIO_MUX_CPU1, 6);
+GPIO_SetupPinMux(40, GPIO_MUX_CPU1, 6);//SDAB
+GPIO_SetupPinMux(41, GPIO_MUX_CPU1, 6);//SCLB
 
 // 配置GPIO工作模式，设置为输入模式
-GPIO_SetupPinOptions(40, GPIO_INPUT, GPIO_PULLUP);  // SCL 上拉
-GPIO_SetupPinOptions(41, GPIO_INPUT, GPIO_PULLUP);  // SDA 上拉
+GPIO_SetupPinOptions(40, GPIO_INPUT, GPIO_PULLUP);  // SDA 上拉
+GPIO_SetupPinOptions(41, GPIO_INPUT, GPIO_PULLUP);  // SCL 上拉
 }
 
 //
@@ -715,50 +715,50 @@ void Read_BMS_Information(int flag)
             I2cMsgIn1.SlaveAddress=0x08;
             COM_flag=100;//切换设备，供下一次读取
         }
-        Read_Function(Safety_Alert_A_Addr,1);//读取A类警告
-        Safety_Alert_A=I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
+//        Read_Function(Safety_Alert_A_Addr,1);//读取A类警告
+//        Safety_Alert_A=I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
         Read_Function(Safety_Status_A_Addr,1);//读取A类故障
         Safety_Status_A=I2cMsgIn1.MsgBuffer[0];
         DELAY_US(1000);//延时1ms
 
     /////////////////读FET状态
-        Read_Function(FET_Status_Addr,1);//读取FET状态
-        FET_Status=I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
+//        Read_Function(FET_Status_Addr,1);//读取FET状态
+//        FET_Status=I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
 
     ////////////读电压与电流///////////////////////////////////////////////
-
-        Read_Function(Cell1_Voltage_Addr,2);
-        Cell1_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell2_Voltage_Addr,2);
-        Cell2_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell3_Voltage_Addr,2);
-        Cell3_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell4_Voltage_Addr,2);
-        Cell4_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell5_Voltage_Addr,2);
-        Cell5_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell6_Voltage_Addr,2);
-        Cell6_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell7_Voltage_Addr,2);
-        Cell7_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell8_Voltage_Addr,2);
-        Cell8_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell9_Voltage_Addr,2);
-        Cell9_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
-        Read_Function(Cell10_Voltage_Addr,2);
-        Cell10_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
-        DELAY_US(1000);//延时1ms
+//
+//        Read_Function(Cell1_Voltage_Addr,2);
+//        Cell1_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell2_Voltage_Addr,2);
+//        Cell2_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell3_Voltage_Addr,2);
+//        Cell3_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell4_Voltage_Addr,2);
+//        Cell4_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell5_Voltage_Addr,2);
+//        Cell5_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell6_Voltage_Addr,2);
+//        Cell6_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell7_Voltage_Addr,2);
+//        Cell7_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell8_Voltage_Addr,2);
+//        Cell8_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell9_Voltage_Addr,2);
+//        Cell9_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(Cell10_Voltage_Addr,2);
+//        Cell10_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        DELAY_US(1000);//延时1ms
         //电池组顶部电压 单位10mv
         Read_Function(Stack_Voltage_Addr,2);
         Stack_Voltage_mv=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
@@ -773,20 +773,20 @@ void Read_BMS_Information(int flag)
         Int_Temperature_Value=convertTwosComplementToDecimal((I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0])*0.1-273.15;
         DELAY_US(1000);//延时1ms
 
-        Read_Function(TS1_Temperature_Addr,2);
-        TS1_Temperature_Value=convertTwosComplementToDecimal((I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0])*0.1-273.15;
-        DELAY_US(1000);//延时1ms
-        Read_Function(TS2_Temperature_Addr,2);
-        TS2_Temperature_Value=convertTwosComplementToDecimal((I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0])*0.1-273.15;
-        DELAY_US(1000);//延时1ms
-        Read_Function(TS3_Temperature_Addr,2);
-        TS3_Temperature_Value=convertTwosComplementToDecimal((I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0])*0.1-273.15;
-        DELAY_US(1000);//延时1ms
+//        Read_Function(TS1_Temperature_Addr,2);
+//        TS1_Temperature_Value=convertTwosComplementToDecimal((I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0])*0.1-273.15;
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(TS2_Temperature_Addr,2);
+//        TS2_Temperature_Value=convertTwosComplementToDecimal((I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0])*0.1-273.15;
+//        DELAY_US(1000);//延时1ms
+//        Read_Function(TS3_Temperature_Addr,2);
+//        TS3_Temperature_Value=convertTwosComplementToDecimal((I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0])*0.1-273.15;
+//        DELAY_US(1000);//延时1ms
     ////////////读主动均衡的电池   子命令读取///////////////////////////////////////////////
-        Write_Function(0x3E,CB_ACTIVE_CELLSA_Addr,2);//
-        DELAY_US(10000);//延时10ms
-        Read_Function(0x40,2);
-        CB_ACTIVE_CELLS=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+//        Write_Function(0x3E,CB_ACTIVE_CELLSA_Addr,2);//
+//        DELAY_US(10000);//延时10ms
+//        Read_Function(0x40,2);
+//        CB_ACTIVE_CELLS=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
     ///////////读最大最小电压   子命令读取///////////////////////////////////////////////
         Write_Function(0x3E,Cells_MaxMinVoltage,2);//
         DELAY_US(10000);//延时10ms
@@ -826,6 +826,21 @@ void Read_BMS_Information(int flag)
         }
 
 }
+
+///////////////快速读取电容电流///////////////////////////////
+void Read_Cap_Current(void)
+{
+//0x08:电池板  0x20：电容板
+        I2cMsgOut1.SlaveAddress=0x20;//更新地址 电容板
+        I2cMsgIn1.SlaveAddress=0x20;
+        //电流
+        Read_Function(CC2_Current_Addr,2);
+        CC2_Current_mA=(I2cMsgIn1.MsgBuffer[1]<<8)+I2cMsgIn1.MsgBuffer[0];
+        CC2_Current_mA_Real=convertTwosComplementToDecimal(CC2_Current_mA);
+        Cap_PACK_Current=CC2_Current_mA_Real;
+}
+
+
 
 //
 // i2c_int1a_isr - I2CA ISR
@@ -911,13 +926,15 @@ __interrupt void i2c_int1a_isr(void)
         {
             CurrentMsgPtr->MsgStatus = I2C_MSGSTAT_RESTART;//更新为准备重启状态,以便进行数据读取
         }
+        invalid_interrupt_flag=0;
     }
     else
     {
         //处理无效中断源:
         // Generate some error due to invalid __interrupt source
         //
-        __asm("   ESTOP0");
+//        __asm("   ESTOP0");
+        invalid_interrupt_flag=1;
     }
 
     //
